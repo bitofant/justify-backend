@@ -1,0 +1,41 @@
+{
+  "name": "justify-backend",
+  "version": "1.1.0",
+  "description": "",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "npm-run-all --parallel watch:backend nodemon:server",
+    "build": "NODE_ENV=production tsc --p tsconfig.json",
+    "watch:backend": "tsc --watch --p tsconfig.json",
+    "nodemon:server": "nodemon dist/app.js",
+    "publish": "npm run publish:1 && npm run publish:2 && npm run publish:3",
+    "publish:1": "npm run build",
+    "publish:2": "docker build -t eu.gcr.io/justify/backend .",
+    "publish:3": "docker push eu.gcr.io/justify/backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://source.developers.google.com/p/justify/r/justify-backend"
+  },
+  "author": "joerantesse@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/firestore": "^2.2.0",
+    "@google-cloud/language": "^3.2.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "socket.io": "^2.2.0",
+    "standalone-logger": "^1.0.6"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/express": "^4.17.0",
+    "@types/node": "^12.0.7",
+    "@types/socket.io": "^2.1.2",
+    "nodemon": "^1.19.1",
+    "npm-run-all": "^4.1.5",
+    "tslint": "^5.17.0",
+    "typescript": "^3.5.1"
+  }
+}
